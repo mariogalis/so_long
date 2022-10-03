@@ -6,32 +6,34 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:25:02 by magonzal          #+#    #+#             */
-/*   Updated: 2022/09/20 19:38:17 by magonzal         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:53:00 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	checksize(t_maps map, size_t lon)
+int	checksize(t_maps map, size_t lon)
 {
-	int	i;
-	int	j;
-	char *opt = "CPE01";
+	int		i;
+	int		j;
+	char	*opt;
 
+	opt = "CPE01";
 	i = 0;
 	while (map.map[i])
 	{
 		j = 0;
 		if (ft_strlen(map.map[i]) != lon)
-			display("Matrix map error");
+			display("MATRIX ERROR");
 		while (map.map[i][j])
 		{
-			if (ft_strchr(opt,map.map[i][j]) == NULL)
+			if (ft_strchr(opt, map.map[i][j]) == NULL)
 				display("ERROR CHARACTER NOT VALID");
 			j++;
 		}
 	i++;
 	}
+	return (i);
 }
 
 t_maps	checkitems(t_maps map, size_t lon)
@@ -59,10 +61,9 @@ t_maps	checkitems(t_maps map, size_t lon)
 		}
 		i++;
 	}
-	if (map.numplayer != 1 || map.colectible <= 1 || map.exit != 1)
+	if (map.numplayer != 1 || map.colectible < 1 || map.exit != 1)
 		display("BAD ITEMS");
-	
-	return map;
+	return (map);
 }
 
 void	checkexterior(t_maps map, size_t lon)

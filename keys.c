@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:42:40 by magonzal          #+#    #+#             */
-/*   Updated: 2022/09/20 20:12:34 by magonzal         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:58:26 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,61 +16,76 @@ void	pressup(t_maps *map)
 {
 	if (map->map[(map->player.x) - 1][map->player.y] == '1')
 		return ;
-	if (map->map[(map->player.x) - 1][map->player.y] == 'C')
+	else if (map->map[(map->player.x) - 1][map->player.y] == 'C')
 	{
 		map->colectible--;
+		map->player.movements++;
 		move(map, 'U');
 	}
-	if (map->map[(map->player.x) - 1][map->player.y] == 'E')
+	else if (map->map[(map->player.x) - 1][map->player.y] == 'E')
 		endgame(*map);
-	if (map->map[(map->player.x) - 1][map->player.y] == '0')
+	else if (map->map[(map->player.x) - 1][map->player.y] == '0')
+	{
 		move(map, 'U');
+		map->player.movements++;
+	}
 }
 
 void	pressdown(t_maps *map)
 {
 	if (map->map[(map->player.x) + 1][map->player.y] == '1')
 		return ;
-	if (map->map[(map->player.x) + 1][map->player.y] == 'C')
+	else if (map->map[(map->player.x) + 1][map->player.y] == 'C')
 	{
 		map->colectible--;
+		map->player.movements++;
 		move(map, 'D');
 	}
-	if (map->map[(map->player.x) + 1][map->player.y] == 'E')
+	else if (map->map[(map->player.x) + 1][map->player.y] == 'E')
 		endgame(*map);
-	if (map->map[(map->player.x) + 1][map->player.y] == '0')
+	else if (map->map[(map->player.x) + 1][map->player.y] == '0')
+	{
+		map->player.movements++;
 		move(map, 'D');
+	}
 }
 
 void	pressright(t_maps *map)
 {
 	if (map->map[map->player.x][(map->player.y) + 1] == '1')
 		return ;
-	if (map->map[map->player.x][(map->player.y) + 1] == 'C')
+	else if (map->map[map->player.x][(map->player.y) + 1] == 'C')
 	{
 		map->colectible--;
+		map->player.movements++;
 		move(map, 'R');
 	}
-	if (map->map[map->player.x][(map->player.y) + 1] == 'E')
+	else if (map->map[map->player.x][(map->player.y) + 1] == 'E')
 		endgame(*map);
-	if (map->map[map->player.x][(map->player.y) + 1] == '0')
+	else if (map->map[map->player.x][(map->player.y) + 1] == '0')
+	{
 		move(map, 'R');
+		map->player.movements++;
+	}
 }
 
 void	pressleft(t_maps *map)
 {
-	printf("X == %d, Y == %d", map->player.x, map->player.y);
 	if (map->map[map->player.x][(map->player.y) - 1] == '1')
 		return ;
-	if (map->map[map->player.x][(map->player.y) - 1] == 'C')
+	else if (map->map[map->player.x][(map->player.y) - 1] == 'C')
 	{
 		map->colectible--;
+		map->player.movements++;
 		move(map, 'L');
 	}
-	if (map->map[map->player.x][(map->player.y) - 1] == 'E')
+	else if (map->map[map->player.x][(map->player.y) - 1] == 'E')
 		endgame(*map);
-	if (map->map[map->player.x][(map->player.y) - 1] == '0')
+	else if (map->map[map->player.x][(map->player.y) - 1] == '0')
+	{
 		move(map, 'L');
+		map->player.movements++;
+	}
 }
 
 int	key_detect(int keycode, t_maps *map)
@@ -85,6 +100,5 @@ int	key_detect(int keycode, t_maps *map)
 		pressleft(map);
 	if (keycode == 53)
 		endwindow(*map);
-	ft_printmap(map->map);
 	return (0);
 }
