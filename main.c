@@ -75,3 +75,5 @@ int	main(int argc, char *argv[])
 	mlx_loop_hook(maps.vars.mlx, printmap, &maps);
 	mlx_loop(maps.vars.mlx);
 }
+
+//Ejemplo kike
